@@ -1,0 +1,16 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}SSLC Status{% endblock title %}
+{% block main-content %}
+{% comment %} <div class="container mt-6" style="padding-top:30px"> {% endcomment %}
+<div class="container">
+    <div class="messages container mt-2">
+        {% if messages %}
+            {% for message in messages %}
+                <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>   
+{% endblock main-content %}
+

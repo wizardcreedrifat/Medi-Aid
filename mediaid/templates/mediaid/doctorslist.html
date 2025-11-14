@@ -1,0 +1,53 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}List{% endblock title %}
+{% block main-content %}
+<div class="wrapper" style="padding-top:0px">
+	<div class="header">Search results for Doctors</div>
+	{% if doc %}
+	<div class="cards_wrap">
+		{% for doc in doc %}
+		<div class="card_item">
+			<div class="card_inner">
+				<img src="{{doc.profilepic.url}}">
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Doctor Id : {{doc.id}}</div>
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Name : {{doc.name}}</div>
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Hospital : {{doc.hospital}}</div>
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Number : {{doc.number}}</div>
+				<a class="btn" style="color:#4A8693;width:100%; background-color:black; font-size:18px; border-radius:25px; 
+				margin-top:5px" type="submit" href="{% url 'doctorsprofile' doc.id %}">Take Appointment</a>
+			</div>
+            {% comment %} <a class="btn" style="color:#4A8693;width:100%; background-color:black; font-size:18px; border-radius:25px; 
+			margin-top:5px" type="submit" href="{% url 'doctorsprofile' %}">Take Appointment</a> {% endcomment %}
+		</div>
+		{% endfor %}
+	</div>
+	{% else %}
+	<h4 class="text-center alert alert-danger"> No Doctors Found</h4>
+	{% endif %}
+</div>
+<div class="wrapper" style="padding-top:10px">
+	<div class="header">Search results for Patients</div>
+	{% if pat %}
+	<div class="cards_wrap">
+		{% for pat in pat %}
+		<div class="card_item">
+			<div class="card_inner">
+				<img src="{{pat.profilepic.url}}">
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Patient Id : {{pat.id}}</div>
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Name : {{pat.ame}}</div>
+				<div class="role_name" style="font-weight:800;font-size: 15px;">Number : {{pat.number}}</div>
+				<a class="btn" style="color:#4A8693;width:100%; background-color:black; font-size:18px; border-radius:25px; 
+				margin-top:5px" type="submit" href="{% url 'patientprofile' pat.id %}">View</a>
+			</div>
+            {% comment %} <a class="btn" style="color:#4A8693;width:100%; background-color:black; font-size:18px; border-radius:25px; 
+			margin-top:5px" type="submit" href="#">View</a> {% endcomment %}
+		</div>
+		{% endfor %}
+	</div>
+	{% else %}
+	<h4 class="text-center alert alert-danger"> No Patients Found</h4>
+	{% endif %}
+</div>  
+</div>
+{% endblock main-content %}

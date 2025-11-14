@@ -1,0 +1,46 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Doctor Profile{% endblock title %}
+{% block main-content %}
+<div class="rk" style="padding-top:0px">
+  {% if doc %}
+    <div class="container my-5">
+     <div class="row">
+      <div class="col-sm-6 text-center align-self-center">
+        {% if doc.profilepic %}
+          <img src="{{doc.profilepic.url}}" alt="" class="img-fluid img-thumbnail">
+        {% else %}
+        <img src="{% static 'mediaid/images/head_sun_flower.png' %}" alt=""> 
+        {% endif %}
+        <h4>Name : {{doc.name}}</h4>
+        <hr>
+          <div class="card mb-2">
+            <div class="card-body">
+              <h5 class="text-center">Qualification : {{doc.qualification}}</h5>
+              <h5 class="text-center">Speciality : {{doc.speciality}}</h5>
+            </div>
+          </div>
+        {% comment %} <small>Term and Condition: Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia, ullam saepe! Iure optio repellat dolor velit, minus rem. Facilis cumque neque numquam laboriosam, accusantium adipisci nisi nihil in et quis?</small> {% endcomment %}
+      </div>
+      {% comment %} </div> {% endcomment %}
+      <div class="col-sm-5 offset-sm-1">
+        <h2>Doctor's Id: {{doc.id}} &nbsp;&nbsp;&nbsp;&nbsp; User Id: {{doc.users_id}}</h2>
+        <hr>
+        <p>Hospital: {{doc.hospital}}</p> <br>
+        <p>Email: {{request.user.email}}</p> <br>
+        <p>Phone: {{doc.number}}</p> <br>
+        <p>Gender: {{doc.gender}}</p> <br>
+        <p>Availability: {{doc.availability}}</p> <br>
+        <p>Start : @{{doc.start}}</p><br>
+        <p>Closes : @{{doc.end}}</p><br>
+        <h4>Fees: {{doc.fees}}</h4> <br>
+        {% comment %} <a href="{% url 'updategarage' mg.garage_id %}" class="btn btn-info btn-sm" style="height:37px">Edit</a> {% endcomment %}
+        <a href="{% url 'appointment_id' doc.id %}" class="btn btn-info shadow px-5 py-2 ms-4">Take Appointment</a>
+        </div>
+      {% else %}
+        <h1 class="text-center alert alert-danger">Doctor not found</h1>
+    </div>
+    {% endif %}
+</div>
+</div>
+{% endblock main-content %}

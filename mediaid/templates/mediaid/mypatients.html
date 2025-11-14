@@ -1,0 +1,45 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}My Patients{% endblock title %}
+{% block main-content %}
+<div class="container mt-6" style="padding-top:30px">
+    <h2 class="text-center alert alert-warning">My Patients List</h2>
+    {% if messages %}
+         {% for message in messages %}
+               <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+         {% endfor %}
+        {% endif %}
+    {% if pat %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Patient Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Disease</th>
+            <th scope="col">Medication</th>
+            <th scope="col">Allergy</th>
+            <th scope="col">Prescription</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for pat in pat %}
+            <tr>
+                <th scope="row"><a href="{% url 'patientprofile' pat.id %}">{{pat.id}}</a></th>
+                <td>{{pat.name}}</td>
+                <td>{{pat.disease}}</td>
+                <td>{{pat.medications}}</td>
+                <td>{{pat.allergy}}</td>
+                <td>
+                <a href="{% url 'idivpres' pat.id %}" class="btn btn-info btn-sm" style="height:37px">Prescription</a>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+        {% else %}
+            <h4 class="text-center alert alert-danger"> No Patients Found</h4>
+    {% endif %}
+</div>
+</div>   
+{% endblock main-content %}
+

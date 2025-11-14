@@ -1,0 +1,70 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Appointment List{% endblock title %}
+{% block main-content %}
+<div class="container mt-6" style="padding-top:30px">
+    {% if appd or appp %}
+    {% if appd %}
+        <h2 class="text-center alert alert-warning">Doctor's Appointment List</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Number</th>
+                <th scope="col">Expected Date</th>
+                <th scope="col">Expected Time</th>
+                <th scope="col">Accepted</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for appd in appd %}
+                <tr>
+                    <th scope="row">{{appd.id}}</th>
+                    <td>{{appd.patient_name}}</td>
+                    <td>{{appd.email}}</td>
+                    <td>{{appd.phone}}</td>
+                    <td>{{appd.expected_date}}</td>
+                    <td>{{appd.expected_time}}</td>
+                    <td>{% if appd.accepted == True %}<i class="fa fa-check" style="font-size:20px"></i>{% elif appd.accepted == False %}Pending{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {%endif%}
+        {% if appp %}
+        <h2 class="text-center alert alert-warning">Patient's Appointment List</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Number</th>
+                <th scope="col">Expected Date</th>
+                <th scope="col">Expected Time</th>
+                <th scope="col">Accepted</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for appp in appp %}
+                <tr>
+                    <th scope="row">{{appp.id}}</th>
+                    <td>{{appp.doctor_name}}</td>
+                    <td>{{appp.email}}</td>
+                    <td>{{appp.phone}}</td>
+                    <td>{{appp.expected_date}}</td>
+                    <td>{{appp.expected_time}}</td>
+                    <td>{% if appp.accepted == True %}<i class="fa fa-check" style="font-size:20px"></i>{% elif appp.accepted == False %}Pending{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% else %}
+                <h4 class="text-center alert alert-danger"> No Appointments Found</h4>
+        {%endif%}
+</div>
+</div>   
+{% endblock main-content %}

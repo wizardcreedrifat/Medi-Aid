@@ -1,0 +1,162 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Patient Registration{% endblock title %}
+{% block main-content %}
+<div style="padding-top:20px">
+<div class="container my-5">
+ <div class="row">
+    <div class="col">
+    <h2 class="text-center alert alert-warning">Insurance Company List</h2>
+    {% if ins %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Company Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Number</th>
+            <th scope="col">Policy</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for ins in ins %}
+            <tr>
+                <th scope="row">{{ins.id}}</th>
+                <td>{{ins.name}}</td>
+                <td>{{ins.number}}</td>
+                <td>{{ins.policy}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h4 class="text-center alert alert-danger"> No Insurance Found</h4>
+    {% endif %}
+  </div>
+    <div class="col">
+         <div class="form-box" style="  border: 2px solid black;border-radius: 15px;padding: 10px;">
+             <div class="header-text" style="color: black; font-family:'Dancing Script', cursive; font-weight:bold; font-size:35px">
+                Patient Regitration Form
+             </div>
+             <hr>
+             <form action="" method="post" enctype="multipart/form-data" novalidate class="shadow p-5"  style="color: black; font-family:'Copperplate'; font-size:20px; margin-top:0px">
+               {% if messages %}
+                {% for message in messages %}
+                      <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+                {% endfor %}
+               {% endif %}
+               {% csrf_token %}
+                   <label for="name">Name</label>
+                   <input type="text" id="name" name="name" placeholder="Name" style="border-radius:10px;height:45px; width:400px">
+
+                   <label for="num">Number</label>
+                   <input type="text" id="num" name="num" placeholder="Number" style="border-radius:10px;height:45px; width:400px">
+
+                   <label for="num">Insurance</label>
+                   <input type="text" id="insurance" name="insurance" placeholder="Insurance Company Id" style="border-radius:10px;height:45px; width:400px">
+       
+                   <br><label for="gender">Gender:</label><br>
+                   <select name="gender" id="gender" style="font-size:0px">
+                       <option value="Male">Male</option>
+                       <option value="Female">Female</option>
+                       <option value="Others">Others</option>
+                   </select><br>
+       
+                   <br><label for="birthday">Birthday:</label>
+                   <input type="date" id="birthday" name="birthday" style="border-radius:10px;height:45px; width:400px"><br>
+                   
+                   <label for="blood">Blood Type</label>
+                   <input type="text" id="blood" name="blood" placeholder="Blood Type" style="border-radius:10px;height:45px; width:400px">
+       
+                   <br><label for="medication">Medication</label>
+                   <textarea id="medication" name="medication" rows="2" cols="50" placeholder="Medication" style="border-radius:10px; width:400px"></textarea>
+                   
+                   <br><label for="disease">Diseases</label>
+                   <textarea id="disease" name="disease" rows="2" cols="50" placeholder="Disease" style="border-radius:10px; width:400px"></textarea>
+       
+                   <br><label for="allergy">Allergy</label>
+                   <textarea id="allergy" name="allergy" rows="2" cols="50" placeholder="Allergy" style="border-radius:10px; width:400px"></textarea>
+                   
+                   <br><label for="propic">Profile Picture</label>
+                   <br><input type="file" id="propic" name="propic" required>
+
+                <br><input type="submit" style="display: inline-block;padding: 8px 30px;background-color: #4A8693;color:black;border-radius: 45px;
+                -webkit-transition: all 0.3s;transition: all 0.3s;border: none; margin-top:50px; margin-left:150px" value="Register"> <br>
+               <br>
+               {% if form.non_field_errors %}
+                   {% for error in form.non_field_errors %}
+                       <p class="alert alert-danger my-3">{{error}}</p>
+                   {% endfor %}
+               {% endif %}
+              </form>
+             </div>
+            </div>
+           </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+{% endblock main-content %}
+
+{% comment %} 
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Patient Register{% endblock title %}
+{% block main-content %}
+<div class="container" style="padding-top:20px; padding-bottom:40px">
+ <div class="row my-6">
+  <div class="col-sm-6 offset-sm-3">
+   <div class="form-box" style="  border: 2px solid black;border-radius: 15px;padding: 10px;">
+      <div class="header-text" style="color: black; font-family:'Dancing Script', cursive; font-weight:bold; font-size:35px">
+         Patient Regitration Form
+      </div>
+      <hr>
+      <form action="" method="post" novalidate class="shadow p-5"  style="color: black; font-family:'Copperplate'; font-size:20px; margin-top:0px">
+        {% if messages %}
+         {% for message in messages %}
+               <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+         {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+            <label for="num">Number</label>
+            <input type="text" id="num" name="num" placeholder="Number" style="border-radius:10px;height:45px; width:400px">
+
+            <br><label for="gender">Gender:</label><br>
+            <select name="gender" id="gender" style="font-size:0px">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+            </select><br>
+
+            <br><label for="birthday">Birthday:</label>
+            <input type="date" id="birthday" name="birthday" style="border-radius:10px;height:45px; width:400px"><br>
+            
+            <label for="blood">Blood Type</label>
+            <input type="text" id="blood" name="blood" placeholder="Blood Type" style="border-radius:10px;height:45px; width:400px">
+
+            <br><label for="medication">Medication</label>
+            <textarea id="medication" name="medication" rows="2" cols="50" placeholder="Medication" style="border-radius:10px; width:400px"></textarea>
+            
+            <br><label for="disease">Diseases</label>
+            <textarea id="disease" name="disease" rows="2" cols="50" placeholder="Disease" style="border-radius:10px; width:400px"></textarea>
+
+            <br><label for="allergy">Allergy</label>
+            <textarea id="allergy" name="allergy" rows="2" cols="50" placeholder="Allergy" style="border-radius:10px; width:400px"></textarea>
+
+
+         <br><input type="submit" style="display: inline-block;padding: 8px 30px;background-color: #4A8693;color:black;border-radius: 45px;
+         -webkit-transition: all 0.3s;transition: all 0.3s;border: none; margin-top:50px; margin-left:150px" value="Register"> <br>
+        <br>
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+       </form>
+      </div>
+     </div>
+    </div>
+</div>
+{% endblock main-content %} {% endcomment %}

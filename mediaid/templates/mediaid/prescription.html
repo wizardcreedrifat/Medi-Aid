@@ -1,0 +1,66 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Appointment List{% endblock title %}
+{% block main-content %}
+<div class="container mt-6" style="padding-top:30px">
+    {% if appd or appp %}
+    {% if appd %}
+        <h2 class="text-center alert alert-warning">Doctor's Prescription List</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Patient Name</th>
+                <th scope="col">Doctor Name</th>
+                <th scope="col">Disease</th>
+                <th scope="col">Hospital</th>
+                <th scope="col">Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for appd in appd %}
+                <tr>
+                    <th scope="row"><a href="{% url 'patprescription' appd.id %}">{{appd.id}}</a></th>
+                    <td>{{appd.patient.name}}</td>
+                    <td>{{appd.doctor.name}}</td>
+                    <td>{{appd.disease}}</td>
+                    <td>{{appd.hospital}}</td>
+                    <td>{{appd.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {%endif%}
+        {% if appp %}
+        <h2 class="text-center alert alert-warning">Patient's Prescription List</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Patient Name</th>
+              <th scope="col">Doctor Name</th>
+              <th scope="col">Disease</th>
+              <th scope="col">Hospital</th>
+              <th scope="col">Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for appp in appp %}
+                <tr>
+                  <th scope="row"><a href="{% url 'patprescription' appp.id %}">{{appp.id}}</a></th>
+                  <td>{{appp.patient.name}}</td>
+                  <td>{{appp.doctor.name}}</td>
+                  <td>{{appp.disease}}</td>
+                  <td>{{appp.hospital}}</td>
+                  <td>{{appp.date}}</td>
+              </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+        {% else %}
+                <h4 class="text-center alert alert-danger"> No Prescriptions Found</h4>
+        {%endif%}
+</div>
+</div>   
+{% endblock main-content %}

@@ -1,0 +1,105 @@
+{% extends 'mediaid/base2.html' %}
+{% block title %}Chat Bot{% endblock title %}
+{% block style %}
+#chatbot{
+    margin-left:auto;
+    marginright:auto;
+    width:100%;
+    margin-top:50px;
+    border-radius:10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.bottext{
+    font-family: monospace;
+    font-size: 20px;
+    text-align:left;
+    line-height: 25px;
+    color: green;
+}
+
+
+.usertext{
+    font-family: monospace;
+    font-size: 20px;
+    text-align:right;
+    line-height: 25px;
+    color: blue;
+}
+
+#userInput{
+    margin-left:auto;
+    marginright:auto;
+    width:100%;
+    margin-top:40px;
+    border-radius:10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+#textInput{
+    border: 3px solid white;
+    border-bottom: 3px solid #afafaf;
+    font-family: monospace;
+    font-size: 14px;
+    width: 85%;
+    padding: 16px;
+    color: black
+}
+
+#buttonInput{
+    display: inline-block;
+    padding: 8px 30px;
+    background-color: #4A8693;
+    color:black;
+    border-radius: 45px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    border: none;
+}
+
+{% endblock style %}
+
+
+{% block main-content %}
+<div style="padding-top:20px">
+    <div class="container my-5">
+     <div class="row">
+        <div class="col-11 text-center mt-4 mb-4">
+            <h1 style="border-bottom: 1px solid #aaa;">
+                 ChatBot
+            </h1>
+        </div>
+      <div class="col-sm-2 border-end">
+       <ul class="list-unstyled">
+        <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+        <li class="d-grid"><a href="{% url 'docprofile' %}" class="btn">Doctor Profile</a></li>
+        <li class="d-grid"><a href="{% url 'patprofile' %}" class="btn">Patient Profile</a></li>
+        <li class="d-grid"><a href="{% url 'chatbot' %}" class="btn {{active}}">ChatBot</a></li>
+        <li class="d-grid"><a href="{% url 'prescription-upload' %}"class="btn">Add Prescription</a></li>
+        {% if doc %} <li class="d-grid"><a href="{% url 'manageappointment' %}" class="btn">Manage Appointments</a></li>{% endif %}
+        <li class="d-grid"><a href="{% url 'appointmentlist' %}" class="btn">Appointments List</a></li>
+        <li class="d-grid"><a href="{% url 'changepassword' %}" class="btn">Change Password</a></li>
+        <li class="d-grid"><a href="{% url 'logout' %}" class="btn">Logout</a></li>
+       </ul>
+      </div>
+      <div class="col-sm-9 offset-sm-1">
+        <div id="chatbot">
+            {% if user_input %}
+            <p class="usertext"><span>{{usr.username}}: {{user_input|safe}}</span></p>
+            {% endif %}
+            <p class="bottext"><span>Chatbot: {% if response %}{{response|safe}}{% else %}Hi there{% endif %}</span></p>
+        </div>
+            <form method="post">
+                {% csrf_token %}
+                <div id="userInput">
+                    <input type="text" id="textInput" name="userMessage" placeholder="Type your query...."/>
+                    <input type="submit" id="buttonInput" value="Send"/>
+                </div>
+            </form>
+      </div>
+     </div>
+    </div>
+    </div>
+{% endblock main-content %}

@@ -1,0 +1,70 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Doctor Register{% endblock title %}
+{% block main-content %}
+<div class="container" style="padding-top:20px; padding-bottom:40px">
+ <div class="row my-6">
+  <div class="col-sm-6 offset-sm-3">
+   <div class="form-box" style="  border: 2px solid black;border-radius: 15px;padding: 10px;">
+      <div class="header-text" style="color: black; font-family:'Dancing Script', cursive; font-weight:bold; font-size:35px">
+         Doctors Regitration Form
+      </div>
+      <hr>
+      <form action="" method="post" enctype="multipart/form-data" novalidate class="shadow p-5"  style="color: black; font-family:'Copperplate'; font-size:20px; margin-top:0px">
+        {% if messages %}
+         {% for message in messages %}
+               <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+         {% endfor %}
+        {% endif %}
+        {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name" style="border-radius:10px;height:45px; width:400px" required>
+
+            <br><label for="num">Number</label>
+            <input type="text" id="num" name="num" placeholder="Number" style="border-radius:10px;height:45px; width:400px" required>
+            <br><label for="gender">Gender:</label><br>
+            <select name="gender" id="gender" style="font-size:0px" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+            </select><br>
+            <br><label for="hospital">Hospital</label>
+            <input type="text" id="hospital" name="hospital" placeholder="Hospital" style="border-radius:10px;height:45px; width:400px" required><br>
+            
+            <br><label for="qualification">Qualification</label>
+            <textarea id="qualification" name="qualification" rows="2" cols="50" placeholder="Qualification" style="border-radius:10px; width:400px" required></textarea>
+
+            <br><label for="speciality">Speciality</label>
+            <textarea id="speciality" name="speciality" rows="2" cols="50" placeholder="Speciality" style="border-radius:10px; width:400px" required></textarea>
+            
+            <br><label for="availability">Availability</label>
+            <input type="text" id="availability" name="availability" placeholder="Sat-Fri" style="border-radius:10px;height:45px; width:400px" required>
+
+            <br><label for="start">Starting Time</label>
+            <input type="time" id="start" name="start" placeholder="opens at" style="border-radius:10px;height:45px; width:400px" required>
+
+            <br><label for="end">Ending Time</label>
+            <input type="time" id="end" name="end" placeholder="closes at" style="border-radius:10px;height:45px; width:400px" required><br>
+
+            <br><label for="fees">Fees</label>
+            <input type="text" id="fees" name="fees" placeholder="Fees" style="border-radius:10px;height:45px; width:400px" required><br>
+
+            <br><label for="comission">Comission</label>
+            <input type="text" id="comission" name="comission" placeholder="Comission %" style="border-radius:10px;height:45px; width:400px" required><br>
+
+            <br><input type="file" id="propic" name="propic" required>
+
+         <br><input type="submit" style="display: inline-block;padding: 8px 30px;background-color: #4A8693;color:black;border-radius: 45px;
+         -webkit-transition: all 0.3s;transition: all 0.3s;border: none; margin-top:50px; margin-left:150px" value="Register"> <br>
+        <br>
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="alert alert-danger my-3">{{error}}</p>
+            {% endfor %}
+        {% endif %}
+       </form>
+      </div>
+     </div>
+    </div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,103 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Appointment{% endblock title %}
+{% block main-content %}
+<div style="padding-top:20px">
+<div class="container my-5">
+ <div class="row">
+    <div class="col">
+    <h2 class="text-center alert alert-warning">Doctors List</h2>
+    {% if doc %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Doctor Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Number</th>
+            <th scope="col">Days</th>
+            <th scope="col">Starts @</th>
+            <th scope="col">Ends @</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for doc in doc %}
+            <tr>
+                <th scope="row"><a href="{% url 'doctorsprofile' doc.id %}">{{doc.id}}</a></th>
+                <td>{{doc.name}}</td>
+                <td>{{doc.number}}</td>
+                <td>{{doc.availability}}</td>
+                <td>{{doc.start}}</td>
+                <td>{{doc.end}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <h4 class="text-center alert alert-danger"> No Doctors Found</h4>
+    {% endif %}
+  </div>
+    <div class="col">
+         <div class="form-box" style="  border: 2px solid black;border-radius: 15px;padding: 10px;">
+             <div class="header-text" style="color: black; font-family:'Dancing Script', cursive; font-weight:bold; font-size:35px">
+                Book Appointment
+             </div>
+             <hr>
+             <form action="" method="post" novalidate class="shadow p-5"  style="color: black; font-family:'Copperplate'; font-size:20px; margin-top:0px">
+               {% if messages %}
+                {% for message in messages %}
+                      <p {% if message.tags %}class="alert alert-{{message.tags}} mb-5"{% endif %}>{{message}}</p>
+                {% endfor %}
+               {% endif %}
+               {% csrf_token %}
+                   <label for="pname">Name</label>
+                   <input type="text" id="pname" name="pname" placeholder="Name" {% if pat %}value="{{pat.name}}"{% endif %} style="border-radius:10px;height:45px; width:400px" required>
+
+                   <label for="pmail">Email</label>
+                   <input type="text" id="pmail" name="pmail" placeholder="Email" style="border-radius:10px;height:45px; width:400px" required>
+
+                   <label for="pnum">Phone Number</label>
+                   <input type="text" id="pnum" name="pnum" placeholder="Phone Number" style="border-radius:10px;height:45px; width:400px" required>
+
+                   <label for="dname">Doctors Name</label>
+                   <input type="text" id="dname" name="dname" placeholder="Doctors Name" style="border-radius:10px;height:45px; width:400px" required>
+
+                   <label for="did">Doctors Id</label>
+                   <input type="text" id="did" name="did" placeholder="Doctors Id" style="border-radius:10px;height:45px; width:400px" required>
+
+                   <br><label for="date">Appointment Date:</label>
+                   <input type="date" id="date" name="date" style="border-radius:10px;height:45px; width:400px" required><br>
+
+                   <br><label for="time">Time:</label>
+                   <input type="time" id="time" name="time" style="border-radius:10px;height:45px; width:400px" required><br>
+
+       
+                   <br><label for="disease">Disease</label>
+                   <textarea id="disease" name="disease" rows="2" cols="50" placeholder="Disease" style="border-radius:10px; width:400px"></textarea>
+
+                   <br>
+                   <label for="paymentmethod">Payment Method:</label> <br>
+                   <select id="paymentmethod" name="paymentmethod" style="border-radius: 10px; width: 400px">
+                       <option value="onsite">OnSite</option>
+                       <option value="online">Online</option>
+                   </select> <br>
+
+                <br><input type="submit" style="display: inline-block;padding: 8px 30px;background-color: #4A8693;color:black;border-radius: 45px;
+                -webkit-transition: all 0.3s;transition: all 0.3s;border: none; margin-top:50px; margin-left:150px" value="Submit"> <br>
+               <br>
+               {% if form.non_field_errors %}
+                   {% for error in form.non_field_errors %}
+                       <p class="alert alert-danger my-3">{{error}}</p>
+                   {% endfor %}
+               {% endif %}
+              </form>
+             </div>
+            </div>
+           </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</div>
+</div>
+{% endblock main-content %}

@@ -1,0 +1,38 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}My Doctors{% endblock title %}
+{% block main-content %}
+<div class="container mt-6" style="padding-top:30px">
+    <h2 class="text-center alert alert-warning">My Doctors List</h2>
+    {% if doc %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Doctor's Id</th>
+            <th scope="col">Doctor's Name</th>
+            <th scope="col">Speciality</th>
+            <th scope="col">Hospital</th>
+            <th scope="col">Appointment</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for doc in doc %}
+            <tr>
+              <th scope="row"><a href="{% url 'doctorsprofile' doc.id %}">{{doc.id}}</a></th>
+              <td>{{doc.name}}</td>
+                <td>{{doc.speciality}}</td>
+                <td>{{doc.hospital}}</td>
+                <td>
+                <a href="{% url 'appointment_id' doc.id %}" class="btn btn-info btn-sm" style="height:37px">Appointment</a>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+        {% else %}
+            <h4 class="text-center alert alert-danger"> No Doctors Found</h4>
+    {% endif %}
+</div>   
+</div>
+{% endblock main-content %}
+

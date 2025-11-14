@@ -1,0 +1,42 @@
+{% extends 'mediaid/base2.html' %}
+{% load static %}
+{% block title %}Health History{% endblock title %}
+{% block main-content %}
+<div class="container mt-6" style="padding-top:30px">
+    <h2 class="text-center alert alert-warning">Health History</h2>
+    {% if mg %} 
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Doctor's Id</th>
+            <th scope="col">Doctor's Name</th>
+            <th scope="col">Disease</th>
+            <th scope="col">Date</th>
+            <th scope="col">Prescription</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for mg in mg %}
+            <tr>
+                <th scope="row">{{mg.garage_id}}</th>
+                <td>{{mg.garage_owner_id}}</td>
+                <td>{{mg.area}}</td>
+                <td>{{mg.hourlyprice}}</td>
+                <td>
+                <a href="{% url 'updategarage' mg.garage_id %}" class="btn btn-info btn-sm" style="height:37px">Prescription</a>
+                <form action="{% url 'del_garage' mg.garage_id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+        {% else %}
+            <h4 class="text-center alert alert-danger"> No Doctors Found</h4>
+    {% endif %}
+</div>   
+</div>
+{% endblock main-content %}
+
