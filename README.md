@@ -1,0 +1,1 @@
+This project Medi-Aid aims to develop a comprehensive medical website and a corresponding mobile application that facilitates seamless interaction between doctors and patients, while providing a wide range of functionalities to enhance the healthcare experience.
